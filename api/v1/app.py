@@ -7,6 +7,7 @@ import os
 
 app = Flask(__name__)
 
+app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def close(self):
@@ -18,5 +19,7 @@ if __name__ == "__main__":
     app.run(
             host=os.getenv("HBNB_API_HOST", '0.0.0.0'),
             port=os.getenv("HBNB_API_PORT", 5000),
-            threaded=True
+            threaded=True,
+            debug=True
            )
+# app.config["DEBUG"] = True
