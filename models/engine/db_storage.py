@@ -49,7 +49,7 @@ class DBStorage:
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
-        return (new_dict)
+        return(new_dict)
 
     def get(self, cls, id):
         """method to retrieve one object"""
@@ -64,9 +64,10 @@ class DBStorage:
             objs = self.__session.query(cls).all()
             for obj in objs:
                 if id == obj.id:
-                    key = obj.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
-        return (new_dict)
+                    #key = obj.__class__.__name__ + '.' + obj.id
+                    #new_dict[key] = str(obj)
+                    return(obj)
+        return None
 
     def new(self, obj):
         """add the object to the current database session"""
