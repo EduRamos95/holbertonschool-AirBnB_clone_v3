@@ -6,7 +6,7 @@ route:
 """
 
 from api.v1.views import app_views
-from flask import abort, jsonify
+from flask import abort, jsonify, request
 from models import storage
 
 
@@ -37,3 +37,14 @@ def states_delete(state_id=None):
     storage.delete(obj_state_id)
     storage.save()
     return jsonify({}), 200
+
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
+def states_create():
+    if request.get_json() is None:
+        abort(400, 'Not a JSON')
+    if 'name' not in request.get_json():
+        abort(400, 'Missing name')
+    obj = storage.create("State",**request.get_json())
+    storage.new(obj)
+    storage.save()
+    return jsonify(obj.to_dict()), 201
