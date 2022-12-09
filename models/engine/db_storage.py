@@ -41,6 +41,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def create(self, cls, **dict_new):
+        """ return a same obj with modify __dict__ """
         if cls is None or len(dict_new) == 0:
             return None
         if cls in classes.keys():
@@ -50,6 +51,7 @@ class DBStorage:
         return obj
 
     def update(self, obj, **dict_new):
+        """ return a same obj with modify __dict__ """
         dict_ignore = {"id": 1, "user_id": 1, "place_id": 1,
                        "city_id": 1, "email": 1, "state_id": 1,
                        "created_at": 1, "updated_at": 1}
