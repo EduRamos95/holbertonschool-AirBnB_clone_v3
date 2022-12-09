@@ -49,6 +49,17 @@ class DBStorage:
             obj = cls(**dict_new)
         return obj
 
+    def update(self, obj, **dict_new):
+        dict_ignore = {"id": 1, "user_id": 1, "place_id": 1,
+                       "city_id": 1, "email": 1, "state_id": 1,
+                       "created_at": 1, "updated_at": 1}
+        if obj is None:
+            return None
+        for k, v in dict_new.items():
+            if dict_ignore.get(k, None) != 1:
+                obj.__dict__.update({k: v})
+        return obj
+
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}
