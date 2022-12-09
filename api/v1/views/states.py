@@ -60,7 +60,7 @@ def update_state(state_id):
         abort(404)
     state = storage.get("State", state_id)
     if state is None:
-        abot(404)
+        abort(404)
     if request.get_json() is None:
         abort(400, 'Not a JSON')
     obj_update = storage.update(state, **request.get_json())
