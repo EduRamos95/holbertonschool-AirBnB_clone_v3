@@ -64,7 +64,7 @@ def place_delete(place_id=None):
     if var_id is None:
         abort(404)
     obj = storage.get(var_cls, var_id)
-    if obj is not None:
+    if obj is None:
         abort(404)
     storage.delete(obj)
     storage.save()
